@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>folks LOCAL COFFEE - Menü</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap');
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #1a1a1a;
+            background-color: #fcfcfc;
+            max-width: 480px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .hero-container {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            background: #2a221e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .brand-header { text-align: center; color: #ffffff; }
+        .brand-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 52px;
+            font-weight: 500;
+            line-height: 0.85;
+            text-transform: lowercase;
+            letter-spacing: -1px;
+        }
+        .brand-subtitle {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.85);
+            margin-top: 8px;
+        }
+        .menu-body { padding: 20px 20px 40px 20px; flex: 1; }
+        .category-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 34px;
+            font-weight: 500;
+            line-height: 1.1;
+            color: #111111;
+            margin-top: 28px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #eaeaea;
+            padding-bottom: 6px;
+        }
+        .menu-item { margin-bottom: 14px; }
+        .item-main { display: flex; justify-content: space-between; align-items: baseline; }
+        .item-name { font-size: 15px; font-weight: 500; color: #222222; }
+        .item-price { font-size: 15px; font-weight: 600; color: #111111; padding-left: 10px; white-space: nowrap; }
+        .item-desc { font-size: 12px; color: #777777; font-style: italic; margin-top: 3px; }
+        .menu-footer {
+            text-align: center;
+            padding: 20px;
+            background: #fcfcfc;
+        }
+        .web-link {
+            display: inline-block;
+            padding: 8px 22px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            color: #444444;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            border: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-container">
+        <div class="brand-header">
+            <div class="brand-title">folks</div>
+            <div class="brand-subtitle">LOCAL COFFEE</div>
+        </div>
+    </div>
+
+    <div class="menu-body" id="menu-container"></div>
+
+    <div class="menu-footer">
+        <a href="#" class="web-link">folkslocalcoffeemenu</a>
+    </div>
+
+    <script>
+        const menuData = [
+            // Sıcak Kahveler
+            { k: "Sıcak Kahveler", u: "Espresso", f: "150₺", a: "" },
+            { k: "Sıcak Kahveler", u: "Double Espresso", f: "160₺", a: "" },
+            { k: "Sıcak Kahveler", u: "Americano", f: "180₺", a: "" },
+            { k: "Sıcak Kahveler", u: "Flat White", f: "200₺", a: "" },
+            { k: "Sıcak Kahveler", u: "Cortado", f: "180₺", a: "" },
+            { k: "Sıcak Kahveler", u: "Cappucino", f: "200₺", a: "" },
+            { k: "Sıcak Kahveler", u: "Cafe Miel", f: "240₺", a: "" },
+            { k: "Sıcak Kahveler", u: "Türk Kahvesi", f: "160₺", a: "" },
+            { k: "Sıcak Kahveler", u: "Double Türk Kahvesi", f: "180₺", a: "" },
+            { k: "Sıcak Kahveler", u: "Kafeinsiz Türk Kahvesi", f: "170₺", a: "" },
+            { k: "Sıcak Kahveler", u: "Double Kafeinsiz Türk Kahvesi", f: "190₺", a: "" },
+            { k: "Sıcak Kahveler", u: "Cafe Latte", f: "210₺", a: "Mocha, White Chocolate Mocha, Karamel, Toffee Nut, Vanilya, Biscoff +30₺" },
+            { k: "Sıcak Kahveler", u: "Black Eye", f: "230₺", a: "Filtre kahve üzerine çift shot espresso" },
+            
+            // Soğuk Kahveler
+            { k: "Soğuk Kahveler", u: "Iced Double Espresso", f: "170₺", a: "" },
+            { k: "Soğuk Kahveler", u: "Iced Americano", f: "190₺", a: "" },
+            { k: "Soğuk Kahveler", u: "Iced Filtre Kahve", f: "200₺", a: "" },
+            { k: "Soğuk Kahveler", u: "Cold Brew", f: "220₺", a: "" },
+            { k: "Soğuk Kahveler", u: "Iced Flat White", f: "210₺", a: "" },
+            { k: "Soğuk Kahveler", u: "Affogato", f: "250₺", a: "" },
+            { k: "Soğuk Kahveler", u: "Iced Cafe Latte", f: "220₺", a: "Mocha, White Chocolate Mocha, Karamel, Toffee Nut, Vanilya +30₺" },
+            { k: "Soğuk Kahveler", u: "Folks Iced Pistachios Latte", f: "260₺", a: "" },
+            { k: "Soğuk Kahveler", u: "Iced Biscoff Latte", f: "260₺", a: "" },
+
+            // Demleme Kahveler
+            { k: "Demleme Kahveler", u: "Filtre Kahve", f: "190₺", a: "" },
+            { k: "Demleme Kahveler", u: "Sütlü Filtre Kahve", f: "200₺", a: "" },
+            { k: "Demleme Kahveler", u: "V60", f: "240₺", a: "Çekirdek seçenekleri için danışınız." },
+            { k: "Demleme Kahveler", u: "Japanese Cold Brew", f: "240₺", a: "V60 ile buz üzerine demleme. Çekirdek seçenekleri için danışınız." },
+
+            // Sıcak İçecekler
+            { k: "Sıcak İçecekler", u: "Demleme Fincan Çay", f: "80₺", a: "" },
+            { k: "Sıcak İçecekler", u: "Earl Grey", f: "100₺", a: "" },
+            { k: "Sıcak İçecekler", u: "Ballı Süt", f: "170₺", a: "" },
+            { k: "Sıcak İçecekler", u: "Sahlep", f: "200₺", a: "" },
+            { k: "Sıcak İçecekler", u: "Chai Tea Latte", f: "200₺", a: "" },
+            { k: "Sıcak İçecekler", u: "Beyaz Çikolata", f: "200₺", a: "Mandalina Aroması +30₺" },
+            { k: "Sıcak İçecekler", u: "Sıcak Çikolata", f: "200₺", a: "Mandalina Aroması +30₺" },
+
+            // Matcha Bar
+            { k: "Matcha Bar", u: "Matcha Latte", f: "220₺", a: "Vanilya, Çilek +30₺" },
+            { k: "Matcha Bar", u: "Iced Matcha Latte", f: "230₺", a: "Vanilya, Çilek, Mango +30₺" },
+            { k: "Matcha Bar", u: "Ice Coconut Cloud Matcha", f: "270₺", a: "Hindistan Cevizi Suyu ve Matcha Kreması" },
+            { k: "Matcha Bar", u: "Matcha Affogato", f: "250₺", a: "Çilekli Dondurma, Matcha Kreması" },
+            { k: "Matcha Bar", u: "Iced Ube Latte", f: "210₺", a: "Vanilya +30₺" },
+
+            // Soğuk İçecekler
+            { k: "Soğuk İçecekler", u: "Su", f: "50₺", a: "" },
+            { k: "Soğuk İçecekler", u: "Beypazarı Maden Suyu", f: "110₺", a: "" },
+            { k: "Soğuk İçecekler", u: "Sıkma Limon Maden Suyu", f: "120₺", a: "" },
+            { k: "Soğuk İçecekler", u: "Churchill", f: "130₺", a: "" },
+            { k: "Soğuk İçecekler", u: "Ev Yapımı Limonata", f: "220₺", a: "Çilekli, Naneli +20₺" },
+            { k: "Soğuk İçecekler", u: "Portakal Suyu", f: "260₺", a: "" },
+            { k: "Soğuk İçecekler", u: "Frozen", f: "230₺", a: "Orman Meyvesi, Mango" },
+            { k: "Soğuk İçecekler", u: "Milkshake", f: "260₺", a: "Vanilya, Çikolata, Çilek, Muz, Biscoff" },
+            { k: "Soğuk İçecekler", u: "Redbull Energy İçeceği", f: "170₺", a: "" },
+            { k: "Soğuk İçecekler", u: "Coco Tropik Latte", f: "270₺", a: "Hindistan Cevizi Sütü, Mandalina, Çikolata" },
+            { k: "Soğuk İçecekler", u: "Sour Garden", f: "270₺", a: "Kuzu kulağı, Yeşil elma, Limon otu" },
+            { k: "Soğuk İçecekler", u: "Berry Lemon Cloud", f: "270₺", a: "Orman meyveli dondurmalı krema, Limonata" },
+            { k: "Soğuk İçecekler", u: "Folks Dream", f: "270₺", a: "Redbull, Çilek, Hindistan cevizi, Limon" },
+            { k: "Soğuk İçecekler", u: "Cool Lime", f: "250₺", a: "" },
+
+            // Bitki & Meyve Çayları
+            { k: "Bitki & Meyve Çayları", u: "Kış Çayı", f: "210₺", a: "" },
+            { k: "Bitki & Meyve Çayları", u: "Ihlamur", f: "210₺", a: "" },
+            { k: "Bitki & Meyve Çayları", u: "Yeşil Çay", f: "200₺", a: "" },
+            { k: "Bitki & Meyve Çayları", u: "Chill Out Bitki Çayı", f: "220₺", a: "Rooibos, Mandalina, Dut, Aynısefa, Böğürtlen, Melisa" },
+            { k: "Bitki & Meyve Çayları", u: "Bloom Bitki Çayı", f: "220₺", a: "Gül, Melisa, Çilek, Aynısefa, Frambuaz, Lavanta" },
+            { k: "Bitki & Meyve Çayları", u: "Tea'na Colada Meyve Çayı", f: "220₺", a: "Ananas, Elma, Ayçiçeği, Hindistan cevizi, Papatya" },
+            { k: "Bitki & Meyve Çayları", u: "Red Berry Bitki Çayı", f: "220₺", a: "Hibiskus, Ananas, Elma, Ayçiçeği, Orman Meyvesi" },
+
+            // Granola & Smoothie & Fresh Bar
+            { k: "Granola & Smoothie & Fresh Bar", u: "Orman Meyveli Granola", f: "300₺", a: "Orman Meyvesi, Granola, Süzme Yoğurt, Chia, Bal, Şekersiz Fıstık Ezmesi, File Badem" },
+            { k: "Granola & Smoothie & Fresh Bar", u: "Muzlu Granola", f: "300₺", a: "Muz, Granola, Süzme Yoğurt, Chia, Bal, Şekersiz Fıstık Ezmesi, File Badem" },
+            { k: "Granola & Smoothie & Fresh Bar", u: "Smoothie No1", f: "260₺", a: "Hurma, Badem, Yulaf, Süt, Tarçın, Bal" },
+            { k: "Granola & Smoothie & Fresh Bar", u: "Smoothie No2", f: "260₺", a: "Fıstık Ezmesi, Kakao, Muz, Yulaf, Süt, Bal" },
+            { k: "Granola & Smoothie & Fresh Bar", u: "Fresh Bar No1", f: "260₺", a: "Taze Sıkım Salatalık, Yeşil Elma, Ananas" },
+            { k: "Granola & Smoothie & Fresh Bar", u: "Fresh Bar No2", f: "250₺", a: "Taze Sıkım Portakal, Havuç, Limon, Zencefil" },
+
+            // Tatlılar
+            { k: "Tatlılar", u: "Pistachio Love", f: "400₺", a: "Dondurma Eşliğinde" },
+            { k: "Tatlılar", u: "Orman Meyveli Brownie", f: "320₺", a: "" },
+            { k: "Tatlılar", u: "Tiramisu", f: "300₺", a: "" },
+            { k: "Tatlılar", u: "Vişneli Tart", f: "320₺", a: "Dondurma Eşliğinde" },
+            { k: "Tatlılar", u: "Ice Cream Puff", f: "300₺", a: "Choux Hamuru, Vanilyalı Dondurma, Çikolata Sos" },
+            { k: "Tatlılar", u: "Glutensiz Şekersiz Yer Fıstıklı Raw", f: "230₺", a: "" },
+            { k: "Tatlılar", u: "Fit Brownie", f: "270₺", a: "" },
+            { k: "Tatlılar", u: "Brownie Cheesecake", f: "340₺", a: "" },
+
+            // Atıştırmalıklar
+            { k: "Atıştırmalıklar", u: "Fresh Pesto Sandwich", f: "300₺", a: "Pesto Sos, Füme Et, Hellim Peynir, Roka, Domates (Soğuk servis edilir.)" },
+            { k: "Atıştırmalıklar", u: "Fresh Karışık Salamlı Şütte Sandwich", f: "270₺", a: "Amerikan Salatası, Salam, Hindi Füme, Kaşar Peyniri, Turşu (Soğuk servis edilir.)" },
+            { k: "Atıştırmalıklar", u: "4 Peynir Bagel Sandwich", f: "180₺", a: "Sıcak servis edilir." },
+            { k: "Atıştırmalıklar", u: "Izgara Tavuk Sandwich", f: "230₺", a: "Sıcak servis edilir." }
+        ];
+
+        function menuyuCiz() {
+            const container = document.getElementById('menu-container');
+            container.innerHTML = '';
+
+            let currentCat = '';
+
+            menuData.forEach(item => {
+                if (item.k !== currentCat) {
+                    currentCat = item.k;
+                    const catHeader = document.createElement('h2');
+                    catHeader.className = 'category-title';
+                    catHeader.innerText = currentCat;
+                    container.appendChild(catHeader);
+                }
+
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'menu-item';
+                itemDiv.innerHTML = `
+                    <div class="item-main">
+                        <span class="item-name">${item.u}</span>
+                        <span class="item-price">${item.f}</span>
+                    </div>
+                    ${item.a ? `<div class="item-desc">${item.a}</div>` : ''}
+                `;
+                container.appendChild(itemDiv);
+            });
+        }
+
+        menuyuCiz();
+    </script>
+</body>
+</html>
